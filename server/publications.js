@@ -7,7 +7,7 @@ Meteor.publish('posts', function(options) {
 });
 
 Meteor.publish('singlePost', function(id) {
-	check(id, String)
+	check(id, String);
 	return Posts.find(id);
 });
 
@@ -19,3 +19,7 @@ Meteor.publish('comments', function(postId) {
 Meteor.publish('notifications', function() {
   return Notifications.find({userId: this.userId});
 });
+
+Meteor.publish('currentUser', function() {
+  return Meteor.users.find(this.userId, {fields: {createdAt: 1}});
+})
